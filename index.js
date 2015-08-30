@@ -26,11 +26,14 @@ function build_components(actions) {
 }
 
 function build_main() {
-  return m("svg[height='500px'][width='500px']",
-    build_components(actions)
+  return m("svg[height='500px'][width='500px']"
+    , m("rect[height='500px'][width='500px']", {"class":"bg"})
+    , build_components(actions)
   );
 }
 
-m.render(document.body, [
-  build_main()
-]);
+setInterval(function() {
+  m.render(document.body, [
+    build_main()
+  ]);
+}, 30);
