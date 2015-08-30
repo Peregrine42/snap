@@ -1,42 +1,11 @@
 /*jslint indent: 2 */
-/*global m */
-/*global puts */
-/*global print */
-/*global _ */
+/*global m, _ */
+/*global puts, print, to_a */
+/*global svg_builder, circle */
 /*global document */
 "use strict";
 
 var actions = [{x: 50, y: 50, type: "point"}];
-
-function svg_attr(label, value) {
-  return "[" + label + "=" + value + "]";
-}
-
-function to_a(a) {
-  return _.map(a, function(i) {
-    return i;
-  });
-}
-
-function svg_string() {
-  var args = to_a(arguments);
-  var type = args.shift();
-  print(type);
-  return type.apply(type, args);
-}
-
-function svg_string_builder(zipped) {
-  var builder = function(total, n) {
-    return total + svg_attr(n[0], n[1]);
-  };
-  return _.reduce(zipped, builder, "");
-}
-
-function circle() {
-  var attrs = ["cx", "cy", "r"];
-  var zipped = _.zip(attrs, arguments);
-  return "circle" + svg_string_builder(zipped);
-}
 
 function build_point(action) {
   var x = action.x;
@@ -44,7 +13,7 @@ function build_point(action) {
 
   var r = 5;
 
-  return svg_string(circle, x, y, r);
+  return svg_builder("string")(circle, x, y, r);
 }
 
 function build_components(actions) {
