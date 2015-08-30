@@ -1,5 +1,6 @@
 /*global to_a */
 /*global _ */
+/*global svg_builder */
 
 function svg_attr(label, value) {
   return "[" + label + "=" + value + "]";
@@ -24,10 +25,9 @@ function circle() {
   return "circle" + svg_string_builder(zipped);
 }
 
-function svg_builder(tag) {
-  var tags = {
-    "attr": svg_attr, "string": svg_string,
-    "build": svg_string_builder, "circle": circle
-  };
-  return tags[tag];
-}
+var svg_builder = {
+  "attr": svg_attr,
+  "string": svg_string,
+  "build": svg_string_builder,
+  "circle": circle
+};
